@@ -13,6 +13,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 const Header = () => {
 
     const [scrolled, setScrolled] = useState(false);
+    const [showCart, setshowCart] = useState(false)
 
     const handleScroll = () => {
         const offset = window.scrollY;
@@ -28,26 +29,29 @@ const Header = () => {
     }, [])
 
     return (
-        <header className={`main-header ${scrolled ? 'sticky-header' : ''}`}>
-            <div className="header-content">
-                <ul className="left">
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Categories</li>
-                </ul>
-                <div className="center">
-                    ECOMMERCE
+        <>
+            <header className={`main-header ${scrolled ? 'sticky-header' : ''}`}>
+                <div className="header-content">
+                    <ul className="left">
+                        <li>Home</li>
+                        <li>About</li>
+                        <li>Categories</li>
+                    </ul>
+                    <div className="center">
+                        ECOMMERCE
+                    </div>
+                    <div className="right">
+                        <TbSearch />
+                        <AiOutlineHeart />
+                        <span className="cart-icon" onClick={() => { setshowCart(true) }}>
+                            <CgShoppingCart />
+                            <span>5</span>
+                        </span>
+                    </div>
                 </div>
-                <div className="right">
-                    <TbSearch />
-                    <AiOutlineHeart />
-                    <span className="cart-icon">
-                        <CgShoppingCart />
-                        <span>5</span>
-                    </span>
-                </div>
-            </div>
-        </header>
+            </header>
+            {showCart && <Cart setshowCart={setshowCart} />}
+        </>
     )
 };
 
